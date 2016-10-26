@@ -10,7 +10,6 @@ env:
     - REPO=fortis/stackd-php
     - COMMIT=${TRAVIS_COMMIT::8}
   matrix:
-    - PHP_VER=5.6
     - PHP_VER=7.0
 
 install:
