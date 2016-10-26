@@ -1,5 +1,5 @@
 FROM alpine:edge
-MAINTAINER Wodby <admin@wodby.com>
+MAINTAINER Alan Bondarchuk <imacoda@gmail.com>
 
 # Install packages
 RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories && \
@@ -92,13 +92,8 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
     # Install composer
     curl -sS https://getcomposer.org/installer | php7 -- --install-dir=/usr/local/bin --filename=composer && \
 
-    # Install drush
-    php -r "readfile('https://s3.amazonaws.com/files.drush.org/drush.phar');" > /usr/local/bin/drush && \
-    chmod +x /usr/local/bin/drush && \
-
-    # Install Drupal Console
-    curl https://drupalconsole.com/installer -o /usr/local/bin/drupal && \
-    chmod +x /usr/local/bin/drupal && \
+   # Add composer parallel install plugin
+    composer global require "hirak/prestissimo:^0.3" && \
 
     # Cleanup
     apk del --purge \
@@ -137,10 +132,6 @@ COPY 00_opcache.ini /etc/php7/conf.d/
 COPY 00_xdebug.ini /etc/php7/conf.d/
 COPY php-fpm.conf /etc/php7/
 
-# Add default drush aliases
-RUN mkdir -p /etc/drush/site-aliases
-COPY default.aliases.drushrc.php /etc/drush/site-aliases/
-
 # Create user www-data
 RUN addgroup -g 82 -S www-data && \
 	adduser -u 82 -D -S -G www-data www-data
@@ -156,8 +147,7 @@ EXPOSE 9000
 # Init www-data user
 USER www-data
 RUN composer global require hirak/prestissimo:^0.3 --optimize-autoloader && \
-    rm -rf ~/.composer/.cache && \
-    drupal init --override
+    rm -rf ~/.composer/.cache
 
 USER root
 COPY docker-entrypoint.sh /usr/local/bin/

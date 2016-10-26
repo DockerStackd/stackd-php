@@ -7,7 +7,7 @@ services:
 
 env:
   global:
-    - REPO=wodby/drupal-php
+    - REPO=fortis/stackd-php
     - COMMIT=${TRAVIS_COMMIT::8}
   matrix:
     - PHP_VER=5.6
@@ -25,8 +25,6 @@ script:
   - docker exec php php -v | grep "PHP $PHP_VER"
   - docker exec --user=82 php pwd | grep "/var/www/html"
   - docker exec --user=82 php composer --version
-  - docker exec --user=82 php drush version
-  - docker exec --user=82 php drupal --version
   - docker exec --user=82 php ssh -V
   - docker exec --user=82 php rsync --version
   - docker exec --user=82 php [ -f /home/www-data/.ssh/testkey ]
