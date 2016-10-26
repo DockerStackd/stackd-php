@@ -1,1 +1,1 @@
-# PHP 7.x Docker image
+# PHP 7 Docker image
