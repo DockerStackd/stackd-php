@@ -142,7 +142,7 @@ RUN mkdir -p /var/www/html && \
 
 WORKDIR /var/www/html
 VOLUME /var/www/html
-EXPOSE 9000
+EXPOSE 9000 7000
 
 # Init www-data user
 USER www-data
