@@ -43,12 +43,13 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
         php7-dom \
         php7-pdo \
         php7-pdo_mysql \
-        php7-sockets \
-        php7-zlib \
-        php7-mcrypt \
+        php7-pdo_pgsql \
         php7-mysqli \
         php7-pgsql \
         php7-sqlite3 \
+        php7-sockets \
+        php7-zlib \
+        php7-mcrypt \
         php7-bz2 \
         php7-phar \
         php7-openssl \
