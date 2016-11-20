@@ -62,6 +62,7 @@ RUN echo 'http://alpine.gliderlabs.com/alpine/edge/main' > /etc/apk/repositories
         php7-dev \
         php7-pear \
         php7-redis \
+        php7-amqp \
         php7-mbstring \
         php7-xdebug \
         php7-exif \
